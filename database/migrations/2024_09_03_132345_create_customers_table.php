@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('shipping_mobile', 15);
             $table->string('housenumber_street', 200)->nullable();
             $table->tinyInteger('is_active')->default(0);
+            $table->string('activation_token')->nullable();
             $table->timestamps();
         });
     }

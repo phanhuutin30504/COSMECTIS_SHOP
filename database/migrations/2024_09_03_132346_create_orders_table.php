@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->dateTime('created_date');
-            $table->tinyInteger('order_status_id');
+            $table->unsignedBigInteger('order_status_id');
             $table->unsignedInteger('staff_id')->nullable();
             $table->unsignedInteger('customer_id');
             $table->string('shipping_fullname', 100);

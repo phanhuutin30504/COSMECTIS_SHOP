@@ -7,13 +7,12 @@
                     <div class="col-md-3 col-sm-3 col-xs-4 list">
                         <div class="footerLink">
                             <h4>Danh mục</h4>
-                            <ul class="list-unstyled">
-                                <li><a href="#">Kem Chống Nắng </a></li>
-                                <li><a href="#">Kem Dưỡng Da </a></li>
-                                <li><a href="#">Kem Trị Mụn </a></li>
-                                <li><a href="#">Kem Trị Thâm Nám </a></li>
-                                <li><a href="#">Sữa Rửa Mặt </a></li>
-                                <li><a href="#">Sữa Tắm </a></li>
+                            <li><a href="#">Kem Chống Nắng </a></li>
+                            <li><a href="#">Kem Dưỡng Da </a></li>
+                            <li><a href="#">Kem Trị Mụn </a></li>
+                            <li><a href="#">Kem Trị Thâm Nám </a></li>
+                            <li><a href="#">Sữa Rửa Mặt </a></li>
+                            <li><a href="#">Sữa Tắm </a></li>
                             </ul>
                         </div>
                     </div>
@@ -79,10 +78,11 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h3 class="modal-title text-center">Đăng ký</h3>
             </div>
-            <form action="?c=customer&a=register" method="POST" role="form" class="form-register">
+            <form action="{{ route('register') }}" method="POST" role="form" class="form-register">
+                @csrf
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="fullname" placeholder="Họ và tên">
+                        <input type="text" class="form-control" name="name" placeholder="Họ và tên">
                     </div>
                     <div class="form-group">
                         <input type="tel" class="form-control" name="mobile" placeholder="Số điện thoại">
@@ -97,21 +97,20 @@
                         <input type="password" class="form-control" name="password_confirmation"
                             placeholder="Nhập lại mật khẩu">
                     </div>
-                    {{-- <div class="form-group g-recaptcha" data-sitekey="<?= GOOGLE_RECAPTCHA_SITE ?>"> --}}
 
-                    </div>
-                    <input type="text" name="hiddenRecaptcha"
-                        style="opacity: 0; position: absolute; top: 0; left: 0; height: 1px; width: 1px;">
+                </div>
+                <input type="text" name="hiddenRecaptcha"
+                    style="opacity: 0; position: absolute; top: 0; left: 0; height: 1px; width: 1px;">
 
-                    <input type="hidden" name="reference" value="">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                    <button type="submit" class="btn btn-primary">Đăng ký</button>
-                </div>
-            </form>
+                <input type="hidden" name="reference" value="">
         </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+            <button type="submit" class="btn btn-primary">Đăng ký</button>
+        </div>
+        </form>
     </div>
+</div>
 </div>
 <!-- END REGISTER DIALOG -->
 <!-- LOGIN DIALOG -->
@@ -124,14 +123,17 @@
                 <!-- Google login -->
                 <br>
                 <div class="text-center">
-                    <a class="btn btn-primary google-login" href="#"><i class="fab fa-google"></i></i> Đăng nhập
+                    <a class="btn btn-primary google-login" href="#"><i class="fab fa-google"></i></i> Đăng
+                        nhập
                         bằng Google</a>
                     <!-- Facebook login -->
-                    <a class="btn btn-primary facebook-login" href="#"><i class="fab fa-facebook-f"></i> Đăng nhập
+                    <a class="btn btn-primary facebook-login" href="#"><i class="fab fa-facebook-f"></i> Đăng
+                        nhập
                         bằng Facebook</a>
                 </div>
             </div>
-            <form action="?c=auth&a=login" method="POST" role="form" class="form-login">
+            <form action="{{ route('customer.login') }}" method="POST" role="form" class="form-login">
+                @csrf
                 <div class="modal-body">
                     <div class="form-group">
                         <input type="email" name="email" class="form-control" placeholder="Email" required>
@@ -186,6 +188,9 @@
             </div>
             <div class="modal-body">
                 <div class="page-content">
+
+
+
                     <div class="clearfix hidden-sm hidden-xs">
                         <div class="col-xs-1">
                         </div>
@@ -213,7 +218,31 @@
                         </div>
                     </div>
                     <div class="cart-product">
+                        <hr>
 
+                        @foreach ($cartItems as $item)
+
+                        <div class="clearfix text-left">
+                            <div class="row">
+                                <div class="col-sm-6 col-md-1">
+                                    <div><img class="img-responsive" src="{{asset($item['image'])}}"
+                                            alt="{{$item['name']}}"></div>
+                                </div>
+                                <div class="col-sm-6 col-md-3"><a class="product-name"
+                                        href="{{route('product.detail',$item['id'])}}">{{$item['name']}}</a></div>
+                                <div class="col-sm-6 col-md-2"><span class="product-item-discount">{{number_format($item['price'],0,'','.')}}</span>
+                                </div>
+                                <div class="col-sm-6 col-md-3"><input type="hidden" value="1"><input
+                                        type="number" onchange="updateProductInCart(this,2)" min="1"
+                                        value="{{$item['quantity']}}"></div>
+                                <div class="col-sm-6 col-md-2"><span>{{ number_format($item['price'] * $item['quantity'], 0, ',', '.') }}₫</span>
+                                </div>
+                                <div class="col-sm-6 col-md-1"><a class="remove-product" href="{{route('cart.remove',$item['id'])}}"><span
+                                            class="glyphicon glyphicon-trash"></span></a></div>
+                            </div>
+                        </div>
+                        <hr>
+                        @endforeach
 
 
                     </div>
@@ -224,36 +253,41 @@
                     <div class="col-xs-12 text-right">
                         <p>
                             <span>Tổng tiền</span>
-                            <span class="price-total">₫</span>
+                            <span class="price-total">{{ number_format($totalPrice, 0, '', '.') }}₫</span>
                         </p>
-                        <input type="button" name="back-shopping" class="btn btn-default" value="Tiếp tục mua sắm">
-                        <input type="button" name="checkout" class="btn btn-primary" value="Đặt hàng">
+
+                        <a href="" class="btn btn-default">Tiếp tục mua sắm</a>
+                        <a href="{{route('cart.show')}}" class="btn btn-primary"> Đặt hàng</a>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <!-- END CART DIALOG -->
 <!-- Facebook Messenger Chat -->
 <!-- Load Facebook SDK for JavaScript -->
 <div id="fb-root"></div>
-<script>
-window.fbAsyncInit = function() {
-    FB.init({
-        xfbml: true,
-        version: 'v4.0'
-    });
-};
 
-(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s);
-    js.id = id;
-    js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
+<script>
+
+    window.fbAsyncInit = function() {
+        FB.init({
+            xfbml: true,
+            version: 'v4.0'
+        });
+    };
+
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
 </script>
 <!-- Your customer chat code -->
 <div class="fb-customerchat" attribution=setup_tool page_id="112296576811987"

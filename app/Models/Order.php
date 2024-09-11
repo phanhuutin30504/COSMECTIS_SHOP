@@ -10,10 +10,10 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
-        'created_date', 'order_status_id', 'staff_id', 'customer_id',
+         'order_status_id', 'staff_id', 'customer_id',
         'shipping_fullname', 'shipping_mobile', 'payment_method',
-        'shipping_ward_id', 'shipping_housenumber_street', 'shipping_fee',
-        'delivered_date'
+        'shipping_ward_id', 'shipping_housenumber_street',
+        'delivered_date','shipping_fee'
     ];
 
     public function customer()
@@ -24,5 +24,9 @@ class Order extends Model
     public function items()
     {
         return $this->hasMany(OrderItem::class);
+    }
+    public function status()
+    {
+        return $this->belongsTo(Status::class, 'order_status_id', 'id');
     }
 }

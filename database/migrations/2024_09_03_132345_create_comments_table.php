@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('email', 100);
             $table->string('fullname', 100);
             $table->float('star');
-            $table->dateTime('created_date');
             $table->text('description')->nullable();
             $table->timestamps();
         });

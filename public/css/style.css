@@ -152,7 +152,7 @@ header form .bt-search {
     border-bottom-left-radius: 0;
 }
 
-header form .search-result {
+/* header form .search-result {
     position: absolute;
     top: 45px;
     z-index: 1001;
@@ -164,11 +164,85 @@ header form .search-result {
     overflow: auto;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+} */
+
+/* header form .search-result li {
+    padding: 5px 0;
+} */
+header form .search-result {
+    position: absolute;
+    top: 45px;
+    z-index: 1001;
+    max-height: 150px;
+    width: 100%;
+    background-color: #fff;
+    visibility: hidden; /* Mặc định ẩn */
+    opacity: 0; /* Mặc định ẩn */
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* Hiệu ứng chuyển tiếp */
+    padding: 5px 20px;
+    overflow: auto;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: 1px solid #ddd;
+    display: grid;
+    grid-template-columns: 3fr 6fr 3fr; /* Bố cục 3 cột */
+    gap: 10px; /* Khoảng cách giữa các cột */
+    align-items: center; /* Căn giữa các phần tử theo chiều dọc */
 }
 
-header form .search-result li {
+header form .search-result.show {
+    visibility: visible; /* Hiển thị */
+    opacity: 1; /* Hiển thị */
+}
+
+.search-item a{
+    display: grid;
+    grid-template-columns: 3fr 5fr 4fr; /* Bố cục 3 cột */
+    gap: 10px; /* Khoảng cách giữa các cột */
+    align-items: center; /* Căn giữa các phần tử theo chiều dọc */
+    border-bottom: 1px solid #ddd;
     padding: 5px 0;
 }
+.search-link {
+    display: block; /* Đảm bảo thẻ <a> bao bọc toàn bộ nội dung */
+    text-decoration: none; /* Bỏ gạch chân liên kết */
+    color: inherit; /* Kế thừa màu sắc của văn bản */
+}
+
+.product-image-search {
+    width: 100%; /* Đảm bảo hình ảnh không bị vượt quá chiều rộng của thẻ <a> */
+    height: auto; /* Giữ tỷ lệ của hình ảnh */
+}
+
+.product-info-search {
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column; /* Tiêu đề và giá nằm theo chiều dọc */
+    justify-content: center; /* Căn giữa các phần tử */
+}
+
+.product-price-search {
+    font-weight: bold;
+    color: #333;
+    padding: 10px;
+}
+
+
+.product-info-search span {
+    font-size: 12px !important; /* Kích thước tiêu đề nhỏ hơn */
+    margin: 0;
+    color: #333;
+}
+
+.product-price-search {
+    font-size: 12px; /* Kích thước giá nhỏ hơn */
+    color: #e74c3c;
+    margin: 5px 0 0; /* Khoảng cách trên và dưới giá */
+}
+
+
+
 
 header form.header-form {
     position: relative;
@@ -245,7 +319,9 @@ nav.desktop-menu {
 .top-services .item-inner>a:hover {
     cursor: pointer
 }
-
+.top-services .item-inner .transport{
+    padding-left: 49px !important;
+}
 .top-services .item-inner .item-inline {
     padding-left: 40px;
     display: inline-block;
@@ -323,15 +399,18 @@ main .row .button-product-action {
 }
 
 main .row .button-product-action .icon {
-    background-color: #252525;
+    background-color: #252525 ;
     margin: 2px;
 
 }
 
-main .row .button-product-action .icon a {
-    color: #ffffff;
+main .row .button-product-action .icon a,
+main .row .button-product-action .icon button{
+    color: #ffffff ;
 }
-
+button.btn.btn-outline-inverse.buy{
+    background-color: #252525 ;
+}
 main .row .button-product-action .icon:hover {
     background-color: #ec0000;
     margin: 2px;
@@ -405,10 +484,10 @@ footer .newsletter input {
     border-radius: 5px;
     background: #ec0000;
     text-align: center;
-    padding: 1em;
+    padding: 1.5em;
     position: fixed;
     bottom: 35px;
-    right: 10em;
+    right: 1.5em;
     cursor: pointer;
     display: none;
     color: #fff;
@@ -802,5 +881,77 @@ label.error {
     font-weight: normal;
 }
 
+.list-unstyled {
+    list-style-type: none;}
+    .logout{
+        color: #252525;
+    }
+
+    /* .product-name {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.5;
+        max-height: 3em;
+    } */
+   /* CSS */
+.button-4 {
+    appearance: none;
+    background-color: #FAFBFC;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    border-radius: 6px;
+    box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+    box-sizing: border-box;
+    color: #24292E;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    list-style: none;
+    padding: 6px 16px;
+    position: relative;
+    transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+    word-wrap: break-word;
+  }
+
+  .button-4:hover {
+    background-color: #F3F4F6;
+    text-decoration: none;
+    transition-duration: 0.1s;
+  }
+
+  .button-4:disabled {
+    background-color: #FAFBFC;
+    border-color: rgba(27, 31, 35, 0.15);
+    color: #959DA5;
+    cursor: default;
+  }
+
+  .button-4:active {
+    background-color: #EDEFF2;
+    box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+    transition: none 0s;
+  }
+
+  .button-4:focus {
+    outline: 1px transparent;
+  }
+
+  .button-4:before {
+    display: none;
+  }
+
+  .button-4:-webkit-details-marker {
+    display: none;
+  }
 
 /*END*/
