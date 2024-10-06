@@ -11,44 +11,29 @@
             <a class="dropdown-item" href="../../pages/order/add.html">Thêm</a>
         </div>
     </li>
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id=""><i
-                class="fab fa-product-hunt"></i> <span>Sản phẩm</span></a>
-        <div class="dropdown-menu" aria-labelledby="">
-            <a class="dropdown-item" href="../../pages/product/list.html">Danh sách</a>
-            <a class="dropdown-item" href="../../pages/product/add.html">Thêm</a>
+    <li class="nav-item dropdown {{ request()->routeIs('admin.product','admin.product.create','admin.products.showImages','admin.comment','admin.product.edit')   ? 'show active' : '' }}">
+        <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#" id="">
+            <i class="fab fa-product-hunt"></i> <span>Sản phẩm</span>
+        </a>
+        <div class="dropdown-menu {{ request()->routeIs('admin.product','admin.product.create','admin.products.showImages','admin.comment')   ? 'show' : '' }}" aria-labelledby="">
+            <a class="dropdown-item {{ request()->routeIs('admin.product') ? 'active' : '' }}" href="{{route('admin.product')}}">Danh sách</a>
+            <a class="dropdown-item {{ request()->routeIs('admin.product.create') ? 'active' : '' }}" href="{{route('admin.product.create')}}">Thêm</a>
         </div>
     </li>
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id=""><i
-                class="fas fa-comments"></i> <span>Comment</span></a>
-        <div class="dropdown-menu" aria-labelledby="">
-            <a class="dropdown-item" href="../../pages/comment/list.html">Danh sách</a>
-        </div>
-    </li>
-
-    <li class="nav-item dropdown show active">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id=""><i
-                class="far fa-image"></i> <span>Hình ảnh</span></a>
-        <div class="dropdown-menu show" aria-labelledby="">
-            <a class="dropdown-item active" href="../../pages/image/list.html">Danh sách</a>
-        </div>
-    </li>
-
-    <li class="nav-item dropdown">
+    <li class="nav-item dropdown {{ request()->routeIs('admin.customer','admin.customer.create','admin.customer.show') ? 'show active' : '' }}">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id=""><i
                 class="fas fa-user-alt"></i> <span>Khách hàng</span></a>
-        <div class="dropdown-menu" aria-labelledby="">
-            <a class="dropdown-item" href="../../pages/customer/list.html">Danh sách</a>
-            <a class="dropdown-item" href="../../pages/customer/add.html">Thêm</a>
+        <div class="dropdown-menu {{ request()->routeIs('admin.customer','admin.customer.create','admin.customer.show') ? 'show ' : '' }}" aria-labelledby="">
+            <a class="dropdown-item {{ request()->routeIs('admin.customer')  ? ' active' : '' }}" href="{{route('admin.customer')}}">Danh sách</a>
+            <a class="dropdown-item {{ request()->routeIs('admin.customer.create')  ? ' active' : '' }}" href="{{route('admin.customer.create')}}">Thêm</a>
         </div>
     </li>
-    <li class="nav-item dropdown">
+    <li class="nav-item dropdown {{ request()->routeIs('admin.category','admin.category.create','admin.category.show') ? 'show active' : '' }}">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id=""><i
                 class="fas fa-folder"></i> <span>Danh mục</span></a>
-        <div class="dropdown-menu" aria-labelledby="">
-            <a class="dropdown-item" href="../../pages/category/list.html">Danh sách</a>
-            <a class="dropdown-item" href="../../pages/category/add.html">Thêm</a>
+        <div class="dropdown-menu {{ request()->routeIs('admin.category','admin.category.create','admin.category.show')  ? 'show ' : '' }}" aria-labelledby="">
+            <a class="dropdown-item {{ request()->routeIs('admin.category') ? ' active' : '' }}" href="{{route('admin.category')}}">Danh sách</a>
+            <a class="dropdown-item {{ request()->routeIs('admin.category.create') ? ' active' : '' }}" href="{{route('admin.category.create')}}">Thêm</a>
         </div>
     </li>
 

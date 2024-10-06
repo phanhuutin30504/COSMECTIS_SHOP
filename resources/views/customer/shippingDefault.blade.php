@@ -28,7 +28,7 @@
                                 <div class="form-group col-sm-6">
                                     <input type="tel" value="{{$customer->mobile}}" class="form-control" name="mobile" placeholder="Số điện thoại" required="" pattern="[0][0-9]{9,}" oninvalid="this.setCustomValidity('Vui lòng nhập số điện thoại bắt đầu bằng số 0 và ít nhất 9 con số theo sau')" oninput="this.setCustomValidity('')">
                                 </div>
-@include('layout.information_form')
+
                                 <div class="form-group col-sm-12">
                                     <input type="text" value="{{$customer->housenumber_street}}" class="form-control" placeholder="Địa chỉ" name="housenumber_street" required="" oninvalid="this.setCustomValidity('Vui lòng nhập địa chỉ bao gồm số nhà, tên đường')" oninput="this.setCustomValidity('')">
                                 </div>

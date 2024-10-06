@@ -90,8 +90,8 @@
                     <div class="form-group">
                         <label> <input type="radio" name="payment_method" value="1"> Chuyển khoản qua ngân hàng </label>
                         <div class="bank-info">
-                            STK: 0421003707901<br>
-                            Chủ TK: Nguyễn Hữu Lộc. Ngân hàng: Vietcombank TP.HCM <br>
+                            STK: 1024446604<br>
+                            Chủ TK: Phan Hữu Tín. Ngân hàng: Vietcombank TP.HCM <br>
                             Ghi chú chuyển khoản là tên và chụp hình gửi lại cho shop dễ kiểm tra ạ
                         </div>
                     </div>

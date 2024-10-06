@@ -1,4 +1,5 @@
 
+</div>
       <!-- Scroll to Top Button-->
       <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
@@ -16,7 +17,10 @@
                  <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                  <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <form action="{{route('admin.logout')}}" method="POST">
+                        @csrf
+                    <button type="submit" class="btn btn-primary">Logout</button>
+                </form>
                  </div>
               </div>
            </div>
@@ -35,5 +39,16 @@
         <!-- Demo scripts for this page-->
         <script src="{{asset('admin/js/demo/datatables-demo.js')}}"></script>
         <script src="{{asset('admin/js/admin.js')}}"></script>
+      <script>
+        ClassicEditor
+         .create(document.querySelector('#editor'))
+         .catch(error=>{
+            console.error(error);
+         })
+      </script>
+<!-- Đặt đoạn mã JavaScript trước thẻ </body> -->
+
+
+
      </body>
   </html>

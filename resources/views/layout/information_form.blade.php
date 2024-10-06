@@ -23,5 +23,5 @@
 </select>
 </div>
 <div class="form-group col-sm-12">
-    <input type="text" value="" class="form-control" placeholder="Địa chỉ" name="address" required="" >
+    <input type="text" value="{{$user->housenumber_street}}" class="form-control" placeholder="Địa chỉ" name="address" required="" >
 </div>

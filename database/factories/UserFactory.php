@@ -21,14 +21,17 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    protected $model = \App\Models\User::class;
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'role_id' => 1, // Sửa tùy theo dữ liệu có trong bảng role
+            'name' => 'Admin',
+            'mobile' => '0326254914',
+            'username' => 'admin',
+            'password' => Hash::make('123456'), // Mã hóa mật khẩu
+            'email' => 'admin@gmail.com',
+            'is_active' => 1,
         ];
     }
 

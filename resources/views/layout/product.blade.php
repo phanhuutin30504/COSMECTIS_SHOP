@@ -6,7 +6,7 @@
         </div>
         <div class="product-meta">
             <h5 class="name">
-                <a class="product-name" href="chi-tiet-san-pham.html"
+                <a class="product-name" href="{{route('product.detail',$product->id)}}"
                     title="{{ $product->name }}">{{ $product->name }}</a>
             </h5>
             <div class="product-item-price">

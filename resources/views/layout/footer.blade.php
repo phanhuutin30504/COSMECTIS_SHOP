@@ -232,9 +232,15 @@
                                         href="{{route('product.detail',$item['id'])}}">{{$item['name']}}</a></div>
                                 <div class="col-sm-6 col-md-2"><span class="product-item-discount">{{number_format($item['price'],0,'','.')}}</span>
                                 </div>
-                                <div class="col-sm-6 col-md-3"><input type="hidden" value="1"><input
-                                        type="number" onchange="updateProductInCart(this,2)" min="1"
-                                        value="{{$item['quantity']}}"></div>
+
+
+                                <div class="col-sm-6 col-md-3"><input type="hidden" value="{{$item['quantity']}}">
+
+                                    <input
+                                        type="number" name="qty" onchange="updateProductInCart(this,2)" min="1"
+                                        value="{{$item['quantity']}}">
+                                    </div>
+
                                 <div class="col-sm-6 col-md-2"><span>{{ number_format($item['price'] * $item['quantity'], 0, ',', '.') }}₫</span>
                                 </div>
                                 <div class="col-sm-6 col-md-1"><a class="remove-product" href="{{route('cart.remove',$item['id'])}}"><span

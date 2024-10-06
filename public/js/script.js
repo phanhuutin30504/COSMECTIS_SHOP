@@ -631,6 +631,37 @@ function goToPage(page) {
     const newURL = getUpdatedParam("page", page);
     window.location.href = newURL;
 }
+function updateProductInCart(input, productId) {
+    let quantity = parseInt(input.value);
+    let priceElement = document.querySelector(`#quantity-${productId}`).closest('.row').querySelector('.product-item-discount');
+    let price = parseInt(priceElement.textContent.replace(/\D/g, '')); // Lấy giá sản phẩm và bỏ các dấu chấm
+
+    // Tính tổng tiền cho sản phẩm đó
+    let total = quantity * price;
+
+    // Cập nhật phần "Thành tiền" của sản phẩm
+    document.getElementById(`total-${productId}`).textContent = total.toLocaleString() + '₫';
+
+    // Cập nhật tổng tiền của giỏ hàng
+    updateCartTotal();
+}
+
+function updateCartTotal() {
+    let cartItems = document.querySelectorAll('.cart-product .row');
+    let totalPrice = 0;
+
+    cartItems.forEach(function(row) {
+        let quantityInput = row.querySelector('input[type="number"]');
+        let quantity = parseInt(quantityInput.value);
+        let priceElement = row.querySelector('.product-item-discount');
+        let price = parseInt(priceElement.textContent.replace(/\D/g, ''));
+
+        totalPrice += quantity * price;
+    });
+
+    // Cập nhật tổng tiền trong phần "Tổng tiền" của giỏ hàng
+    document.querySelector('.price-total').textContent = totalPrice.toLocaleString() + '₫';
+}
 
 // Hiển thị cart
 

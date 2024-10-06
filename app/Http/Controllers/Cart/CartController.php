@@ -17,6 +17,7 @@ class CartController extends Controller
     }
     public function addToCart(Request $request)
     {
+
         $user = auth()->guard('customer')->user();
         $productId = $request->input('product_id');
         $quantity = $request->input('qty', 1);
@@ -52,7 +53,7 @@ class CartController extends Controller
         });
 // dd($totalPrice);
 
-        return view('cart.show', compact('cartItems', 'totalPrice'));
+        return view('cart.show', compact('cartItems', 'totalPrice','user'));
     }
 
 
@@ -60,6 +61,8 @@ class CartController extends Controller
     {
         $user = auth()->guard('customer')->user();
         $this->cartHelper->removeFromCart($user->id, $productId);
+
+
 
         return redirect()->back();
     }

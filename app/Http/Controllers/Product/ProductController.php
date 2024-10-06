@@ -22,10 +22,10 @@ class ProductController extends Controller
             $category = null;
         } elseif ($categoryId) {
             $query->where('category_id', $categoryId);
-            $products = $query->paginate(9);
+            $products = $query->paginate(12);
             $category = Category::findOrFail($categoryId);
         } else {
-            $products = $query->paginate(9);
+            $products = $query->paginate(12);
             $category = null;
         }
         $categories = Category::all();
@@ -70,7 +70,7 @@ class ProductController extends Controller
             ['brand', 'category', 'comments' => function ($query) {
                 $query->orderBy('id', 'DESC')
                     ->limit(5);
-            }]
+            }, 'images']
         )->findOrFail($id);
 
         $relatedProducts = Product::where('category_id', $product->category_id)

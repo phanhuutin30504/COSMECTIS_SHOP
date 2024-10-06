@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Contract;
 use App\Http\Controllers\Controller;
 use App\Mail\ContactMail;
 use App\Models\Comment;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -33,7 +34,14 @@ class ContactController extends Controller
     public function comment(Request $request){
         $commentData = $request->all();
 
+
           $comment = Comment::create($commentData);
+          $product = Product::find($commentData['product_id']);
+          if ($product) {
+
+              $product->star = $commentData['star'];
+              $product->save();
+          }
           return redirect()->back()->with('success', 'Cảm ơn bạn đã đánh giá sản phẩm!');
     }
 }

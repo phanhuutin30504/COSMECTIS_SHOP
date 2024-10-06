@@ -10,10 +10,13 @@
           <li class="breadcrumb-item active">Đánh giá</li>
        </ol>
        <!-- DataTables Example -->
+       <form id="deleteForm" action="{{ route('deleteSelected.comment') }}" method="POST">
+        @csrf
+        @method('DELETE')
        <div class="action-bar">
 
-          <input type="submit" class="btn btn-danger btn-sm" value="Xóa" name="delete">
-       </div>
+        <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
+    </div>
        <div class="card mb-3">
           <div class="card-body">
              <div class="table-responsive">
@@ -30,39 +33,36 @@
                       </tr>
                    </thead>
                    <tbody>
-                      <tr>
-                         <td><input type="checkbox"></td>
-                         <td>a@gmail.com</td>
-                         <td>Nguyễn Văn A </td>
-                         <td>4</td>
-                         <td>2019-08-12</td>
-                         <td>ABC</td>
-                         <td><input type="button" onclick="Delete('25');" value="Xóa" class="btn btn-danger btn-sm"></td>
-                      </tr>
-                      <tr>
-                         <td><input type="checkbox"></td>
-                         <td>b@gmail.com</td>
-                         <td>Nguyễn Văn B </td>
-                         <td>4</td>
-                         <td>2019-08-13</td>
-                         <td>XYZ</td>
-                         <td><input type="button" onclick="Delete('25');" value="Xóa" class="btn btn-danger btn-sm"></td>
-                      </tr>
+                    @foreach ($comment as $comments)
+
+                    <tr>
+                        <td><input type="checkbox" name="ids[]" value="{{ $comments->id }}"></td>
+                        <td>{{$comments->email}}</td>
+                        <td>{{$comments->fullname}}</td>
+                        <td>{{$comments->star}}</td>
+                        <td>{{$comments->created_at}}</td>
+                        <td>{{$comments->description}}</td>
+                        <td>
+                            <form action="{{route('admin.comment.destroy',$comments->id)}}" method="post">
+                               @csrf
+                                @method('DELETE')
+                                <button type="submit"  class="btn btn-danger btn-sm">Xóa</button>
+                            </form>
+
+                        </td>
+                     </tr>
+                    @endforeach
+
+
                    </tbody>
                 </table>
              </div>
           </div>
        </div>
+       </form>
     </div>
     <!-- /.container-fluid -->
     <!-- Sticky Footer -->
-    <footer class="sticky-footer">
-       <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-             <span>Copyright © Thầy Lộc 2017</span>
-          </div>
-       </div>
-    </footer>
- </div>
+
 @endsection
 

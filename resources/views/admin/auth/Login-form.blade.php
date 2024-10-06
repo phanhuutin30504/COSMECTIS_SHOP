@@ -5,11 +5,22 @@
       <div class="card-header card-header-login">
         <img src="images/logo.jpg">
       </div>
+      @if ($errors->any())
+      <div class="alert alert-danger text-center ">
+          <ul class="list-unstyled">
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+  @endif
       <div class="card-body">
-        <form>
+        <form action="{{route('login')}}" method="POST">
+            @csrf
+
           <div class="form-group">
             <div class="form-label-group">
-              <input type="email" id="username" name="username" class="form-control" placeholder="Tài khoản" required="required" autofocus="autofocus">
+              <input type="text" id="username" name="username" class="form-control" placeholder="Tài khoản" required="required" autofocus="autofocus">
               <label for="username">Tài khoản</label>
             </div>
           </div>
@@ -27,7 +38,7 @@
               </label>
             </div>
           </div>
-          <a class="btn btn-primary btn-block" href="index.html">Đăng nhập</a>
+          <button class="btn btn-primary btn-block" >Đăng nhập</button>
         </form>
       </div>
     </div>

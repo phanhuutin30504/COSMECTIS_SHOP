@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('barcode', 13);
             $table->string('sku', 20);
             $table->string('name', 300);
-            $table->integer('price');
+            $table->decimal('price');
             $table->integer('discount_percentage');
             $table->date('discount_from_date');
             $table->date('discount_to_date');

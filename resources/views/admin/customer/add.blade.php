@@ -10,12 +10,13 @@
           <li class="breadcrumb-item active">Khách hàng</li>
        </ol>
        <!-- /form -->
-       <form method="post" action="" enctype="multipart/form-data">
+       <form method="post" action="{{route('admin.customer.store')}}" enctype="multipart/form-data">
+        @csrf
           <div class="form-group row">
-             <label class="col-md-12 control-label" for="fullname">Tên</label>
+             <label class="col-md-12 control-label" for="name">Tên</label>
              <div class="col-md-9 col-lg-6">
                 <input type="hidden" name="id" value="1" class="form-control">
-                <input name="fullname" id="fullname" type="text" value="" class="form-control">
+                <input name="name" id="name" type="text" value="" class="form-control">
              </div>
           </div>
           <div class="form-group row">
@@ -38,32 +39,9 @@
           </div>
 
           <div class="form-group row">
-             <label class="col-md-12 control-label" for="">Địa chỉ</label>
-             <div class="col-sm-4">
-                <select name="city" class="form-control">
-                   <option value="">Tỉnh / thành phố</option>
-                   <option value="hcm">Hồ Chí Minh</option>
-                   <option value="hn">Hà Nội</option>
-               </select>
-             </div>
-            <div class="col-sm-4">
-                <select name="district" class="form-control">
-                    <option value="">Quận / huyện</option>
-                    <option value="q1">Quận 1</option>
-                    <option value="q2">Quận 2</option>
-                </select>
-            </div>
-            <div class="col-sm-4">
-                <select name="ward" class="form-control">
-                    <option value="">Phường / xã</option>
-                    <option value="p1">Phường 1</option>
-                    <option value="p2">Phường 2</option>
-                </select>
-            </div>
-          </div >
-          <div class="form-group row">
+            <label class="col-md-12 control-label" for="">Địa chỉ</label>
             <div class="col-md-9 col-lg-6">
-                <input type="text" class="form-control" placeholder="Số nhà, đường" name="housenumumber_street">
+                <input type="text" class="form-control" placeholder="Số nhà, đường" name="housenumber_street">
             </div>
           </div>
           <div class="form-group row">
@@ -83,25 +61,18 @@
           <div class="form-group row">
              <label class="col-md-12 control-label" for="mobile">Đã kích hoạt</label>
              <div class="col-md-9 col-lg-6">
+                <input name="active" id="active" type="hidden" value="0" >
                 <input name="active" id="active" type="checkbox" value="1" checked>
              </div>
           </div>
 
           <div class="form-action">
-             <input type="submit" class="btn btn-primary btn-sm" value="Cập nhật" name="update">
+             <button type="submit" class="btn btn-primary btn-sm" >Tạo</button>
           </div>
        </form>
        <!-- /form -->
     </div>
     <!-- /.container-fluid -->
-    <!-- Sticky Footer -->
-    <footer class="sticky-footer">
-       <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-             <span>Copyright © Thầy Lộc 2017</span>
-          </div>
-       </div>
-    </footer>
- </div>
+
 @endsection
 

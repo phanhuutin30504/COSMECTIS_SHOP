@@ -34,7 +34,9 @@
                                     Đặt hàng ngày: {{ $order->created_at }}
                                 </span>
                                 <hr>
-
+@php
+    dd($order)
+@endphp
                                 <!-- Vòng lặp cho từng sản phẩm trong đơn hàng -->
                                 @foreach ($order->items as $item)
 

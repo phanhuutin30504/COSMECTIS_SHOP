@@ -20,7 +20,9 @@
                 <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                   <tr>
-                      <th><input type="checkbox" onclick="checkAll(this)"></th>
+                      <th>
+                        <input type="checkbox" onclick="checkAll(this)">
+                    </th>
                                       <th>Mã</th>
                                       <th>Tên khách hàng</th>
                                       <th>Điện thoai</th>
@@ -35,55 +37,50 @@
                                       <th>Tổng cộng</th>
                                       <th>Địa chỉ giao hàng</th>
                               <th>Ngày giao</th>
-                                      <th>Nhân viên phụ trách</th>
+
                                       <th></th>
                                       <th></th>
                                       <th></th>
                                    </tr>
                                 </thead>
                                 <tbody>
-                                   <tr>
-                               <td><input type="checkbox"></td>
-                                      <td >#112</td>
-                                      <td>Nguyễn Văn A</td>
-                                      <td>0932538468</td>
-                                      <td>nguyenvana@gmail.com</td>
-                                      <td>Đang xử lý</td>
-                                      <td>2019-03-10 15:35:59 </td>
-                                      <td>Nguyễn Thị C</td>
-                              <td>0123456789</td>
-                              <td>COD</td>
-                                      <td>2,000,000 đ</td>
-                              <td>50,000 đ</td>
-                                      <td>2,050,000 đ</td>
-                                      <td>278 Hòa Bình, Hiệp Tân, Tân Phú, TP.HCM</td>
-                              <td>2019-03-13</td>
-                                      <td >Nguyễn Hữu Lộc</td>
-                                      <td > <input type="button" onclick="Confirm('1');" value="Xác nhận" class="btn btn-info btn-sm"></td>
-                                      <td > <input type="button" onclick="Edit('1');" value="Sửa" class="btn btn-warning btn-sm"></td>
-                                      <td > <input type="button" onclick="DELETE('1');" value="Xóa" class="btn btn-danger btn-sm"></td>
-                                   </tr>
-                                   <tr>
-                               <td><input type="checkbox"></td>
-                                      <td >#113</td>
-                              <td>Nguyễn Văn B</td>
-                              <td>0932538468</td>
-                              <td>nguyenvanb@gmail.com</td>
-                              <td>Đang xử lý</td>
-                              <td>2019-03-10 15:35:59 </td>
-                              <td>Nguyễn Thị D</td>
-                              <td>0123456789</td>
-                              <td>Bank</td>
-                              <td>3,000,000 đ</td>
-                              <td>50,000 đ</td>
-                              <td>3,050,000 đ</td>
-                              <td>278 Hòa Bình, Hiệp Tân, Tân Phú, TP.HCM</td>
-                              <td>2019-03-13</td>
-                              <td>Nguyễn Văn T</td>
-                                      <td > </td>
-                                      <td > <input type="button" onclick="Edit('1');" value="Sửa" class="btn btn-warning btn-sm"></td>
-                                      <td > <input type="button" onclick="DELETE('1');" value="Xóa" class="btn btn-danger btn-sm"></td>
-                                   </tr>
+                                 @foreach ($orders as $order)
+
+                                 <tr>
+                                    <td><input type="checkbox"></td>
+                                           <td >#112</td>
+                                           <td>{{$order->customer->name}}</td>
+                                           <td>{{$order->customer->mobile}}</td>
+                                           <td>{{$order->customer->email}}</td>
+                                           <td>{{$order->status->description}}</td>
+                                           <td>{{$order->created_at}}</td>
+                                           <td>{{$order->shipping_fullname}}</td>
+                                   <td>{{$order->shipping_mobile}}</td>
+                                   <td>{{$order->payment_method == 0 ? 'COD' :'Chuyển khoản'}}</td>
+                                   <td>
+                                    @foreach ($order->items as $item)
+                                        {{ number_format($item->unit_price, 0, ',', '.') }}<br>
+                                    @endforeach
+                                </td>
+                                   <td>{{number_format($order->shipping_fee, 0, ',', '.')}}đ</td>
+                                   <td>
+                                    @php
+                                        $totalUnitPrice = $order->items->sum('unit_price');
+                                        $totalPrice = $totalUnitPrice + $order->shipping_fee;
+                                    @endphp
+                                    {{ number_format($totalPrice, 0, ',', '.') }}đ
+                                </td>
+                                           <td>{{$order->shipping_housenumber_street}}</td>
+                                   <td> {{ \Carbon\Carbon::parse($order->created_at)->addDays(7)->format('d/m/Y') }}</td>
+
+                                   <td>
+                                    <input type="button" onclick="confirmOrder({{ $order->id }});" value="Xác nhận" class="btn btn-info btn-sm">
+                                </td>
+                                                                           <td > <input type="button" onclick="Edit('1');" value="Sửa" class="btn btn-warning btn-sm"></td>
+                                           <td > <input type="button" onclick="DELETE('1');" value="Xóa" class="btn btn-danger btn-sm"></td>
+                                        </tr>
+                                 @endforeach
+
                                 </tbody>
 
 
@@ -93,13 +90,5 @@
        </div>
     </div>
     <!-- /.container-fluid -->
-    <!-- Sticky Footer -->
-    <footer class="sticky-footer">
-       <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-             <span>Copyright © Thầy Lộc 2017</span>
-          </div>
-       </div>
-    </footer>
- </div>
+
 @endsection

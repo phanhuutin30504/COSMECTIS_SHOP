@@ -25,7 +25,7 @@ class LoginController extends Controller
             // Nếu tài khoản đã được kích hoạt, đăng nhập
 
             if (Auth::guard('customer')->attempt($credentials)) {
-                return redirect()->intended('/')->with('success', 'Đăng nhập thành công');
+                return redirect()->back()->with('success', 'Đăng nhập thành công');
             } else {
                 return redirect()->back()->withErrors([
                     'error' => 'Thông tin đăng nhập không chính xác.',
@@ -39,7 +39,6 @@ class LoginController extends Controller
     }
     public function logout(Request $request){
         Auth::guard('customer')->logout();
-        $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('index');
     }

@@ -42,14 +42,6 @@
        <!-- /form -->
     </div>
     <!-- /.container-fluid -->
-    <!-- Sticky Footer -->
-    <footer class="sticky-footer">
-       <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-             <span>Copyright © Thầy Lộc 2017</span>
-          </div>
-       </div>
-    </footer>
- </div>
+
 @endsection
 
