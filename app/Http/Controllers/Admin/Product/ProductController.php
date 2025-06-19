@@ -81,8 +81,8 @@ class ProductController extends Controller
 {
 
     $request->validate([
-        'name' => 'required|string|max:255',
-        'price' => 'required|string',
+        'name' => 'nullable|string|max:255',
+        'price' => 'nullable|string',
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
     ]);
 
@@ -126,11 +126,11 @@ class ProductController extends Controller
     public function deleteSelected(Request $request)
 {
 
-    // Lấy danh sách các id được chọn
+
     $ids = $request->input('ids');
 
     if (!empty($ids)) {
-        // Xóa các sản phẩm tương ứng với các id
+
         Product::whereIn('id', $ids)->delete();
         return redirect()->back()->with('success', 'Các mục đã được xóa thành công!');
     }

@@ -34,12 +34,8 @@
                                     Đặt hàng ngày: {{ $order->created_at }}
                                 </span>
                                 <hr>
-@php
-    dd($order)
-@endphp
                                 <!-- Vòng lặp cho từng sản phẩm trong đơn hàng -->
                                 @foreach ($order->items as $item)
-
                                     <div class="row">
                                         <div class="col-md-2">
                                             <img src="{{asset($item->product->featured_image)}}" alt="" class="img-responsive">
@@ -60,10 +56,13 @@
                                     </div>
                                 @endforeach
                             </div>
+
                         </div>
                     </div>
                 @endforeach
-
+                <div class="col-md-12 text-center">
+                    {{ $myOrder->links() }}
+                </div>
                 </div>
             </div>
         </div>

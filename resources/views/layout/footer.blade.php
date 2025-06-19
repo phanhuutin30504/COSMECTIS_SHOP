@@ -188,9 +188,6 @@
             </div>
             <div class="modal-body">
                 <div class="page-content">
-
-
-
                     <div class="clearfix hidden-sm hidden-xs">
                         <div class="col-xs-1">
                         </div>

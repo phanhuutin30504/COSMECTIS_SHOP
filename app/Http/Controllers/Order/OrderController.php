@@ -61,7 +61,7 @@ class OrderController extends Controller
     }
     public function myOrder($id)
     {
-        $myOrder = Order::with('items.product', 'status')->where('customer_id', $id)->get();
+        $myOrder = Order::with('items.product', 'status')->where('customer_id', $id)->paginate(5);
         return view('cart.myOrder', ['myOrder' => $myOrder]);
     }
 }
