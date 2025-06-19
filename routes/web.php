@@ -10,6 +10,7 @@ use App\Http\Controllers\Customer\RegisterController;
 use App\Http\Controllers\Information\PolicyController;
 use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Product\ProductController;
+use App\Http\Controllers\Sepay\SePayController;
 use Illuminate\Support\Facades\Route;
 use Spatie\FlareClient\View;
 
@@ -65,6 +66,7 @@ Route::get('order-success', function () {
 Route::get('my-order/{id}',[OrderController::class,'myOrder'])->name('myOrder');
 Route::post('/order',[OrderController::class,'order'])->name('order');
 Route::get('/get-shipping-fee', [OrderController::class, 'getShippingFee'])->name('getShippingFee');
+
 
 
 

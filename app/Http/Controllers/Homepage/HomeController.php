@@ -15,7 +15,7 @@ class HomeController extends Controller
         $featuredProducts  = Product::where('featured', 1)->limit(8)->get();
         $newProducts = Product::orderBy('created_at', 'DESC')->limit(8)->get();
         $categories = Category::whereHas('products')->with('products')->get();
-
+        // dd($categories->toArray());
         return view('home.index', [
             'products' => $featuredProducts,
             'newProducts'=>$newProducts,

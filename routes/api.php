@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Sepay\SePayController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Sepay
+// routes/web.php
+Route::post('/sepay/webhook', [SePayController::class, 'webhook']);
+Route::post('/sepay/create-order', [SePayController::class, 'createOrder']);

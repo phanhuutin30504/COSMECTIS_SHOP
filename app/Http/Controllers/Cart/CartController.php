@@ -24,14 +24,13 @@ class CartController extends Controller
 
         $this->cartHelper->addToCart($user->id, $productId, $quantity);
 
-        return redirect()->route('cart.show');
+        return redirect()->back();
     }
 
     public function showCart()
     {
 
         $user = auth()->guard('customer')->user();
-
         $cart = Cart::with('items.product')->where('user_id', $user->id)->first();
         // không có giỏ hàng, trả về view với giỏ hàng trống
         if (!$cart) {
@@ -51,7 +50,7 @@ class CartController extends Controller
         $totalPrice = $cartItems->sum(function ($item) {
             return $item['price'] * $item['quantity'];
         });
-// dd($totalPrice);
+        // dd($totalPrice);
 
         return view('cart.show', compact('cartItems', 'totalPrice','user'));
     }

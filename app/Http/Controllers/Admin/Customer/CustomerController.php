@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Province;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class CustomerController extends Controller
 {
@@ -45,17 +46,22 @@ class CustomerController extends Controller
     public function update(Request $request, $id){
         $request->validate([
             'name' => 'nullable|string|max:255',
-            'email' => 'nullable|email|max:255|unique:users,email',
+            'email' => 'nullable|email|max:255|unique:users,email,' . $id,
             'password' => 'nullable|string|min:6',
             'mobile' => 'nullable|digits_between:10,11',
             'housenumber_street' => 'nullable|string|max:255',
             'shipping_name' => 'nullable|string|max:255',
             'shipping_mobile' => 'nullable|digits_between:10,11',
         ]);
-
         try{
             $customer = Customer::findOrFail($id);
-            $customer->update($request->all());
+            $data = $request->except('password');
+
+            if ($request->filled('password')) {
+                $data['password'] = Hash::make($request->password);
+            }
+
+            $customer->update($data);
             return redirect()->back()->with('success','Sửa thông tin người dùng thành công');
         }catch (\Exception $e) {
             return redirect()->back()->with('error','Sửa thông tin người dùng thất bại');

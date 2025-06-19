@@ -15,8 +15,8 @@ class CartHelper
 
         // Kiểm tra nếu sản phẩm đã có trong giỏ hàng
         $cartItem = CartItem::where('cart_id', $cart->id)
-                             ->where('product_id', $productId)
-                             ->first();
+                    ->where('product_id', $productId)
+                    ->first();
 
         if ($cartItem) {
             // Cập nhật số lượng sản phẩm
@@ -25,7 +25,7 @@ class CartHelper
         } else {
             // Thêm sản phẩm mới vào giỏ hàng
             $product = Product::findOrFail($productId);
-// dd($product);
+            // dd($product);
             CartItem::create([
                 'cart_id' => $cart->id,
                 'product_id' => $productId,
@@ -56,8 +56,8 @@ class CartHelper
 
         if ($cart) {
             $cartItem = CartItem::where('cart_id', $cart->id)
-                                 ->where('product_id', $productId)
-                                 ->first();
+                        ->where('product_id', $productId)
+                        ->first();
 
             if ($cartItem) {
                 $cartItem->delete();
